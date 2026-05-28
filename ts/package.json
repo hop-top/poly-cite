@@ -1,0 +1,25 @@
+{
+  "name": "@hop-top/cite",
+  "version": "0.1.0",
+  "homepage": "https://hop.top/cite",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "ci:build": "pnpm install --ignore-scripts && pnpm build",
+    "test": "pnpm dlx --allow-build=esbuild vitest@2.1.8 run",
+    "lint": "node -e \"process.exit(0)\""
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
+  }
+}

@@ -1,0 +1,33 @@
+---
+doc_type: engineering
+subtype: diagram
+status: draft
+title: Polyglot Contract Boundary
+summary: Mermaid flowchart for shared fixtures and stable public facades across language ports.
+owner: Idea Crafters Labs
+created: 2026-05-13
+updated: 2026-05-14
+audience:
+  - developers
+  - tool_authors
+  - oss_contributors
+  - ai_assistant
+confidentiality: public
+tags:
+  - cite
+  - polyglot
+  - contract
+  - diagram
+  - mermaid
+---
+flowchart TD
+    Fixture[Shared JSON/proto fixture] --> Go[Go tests]
+    Fixture --> TS[TypeScript tests]
+    Fixture --> Py[Python tests]
+    Fixture --> Rs[Rust tests]
+    Fixture --> Php[PHP tests]
+    Go --> Facade[Stable public facade]
+    TS --> Facade
+    Py --> Facade
+    Rs --> Facade
+    Php --> Facade

@@ -1,0 +1,9 @@
+# Root/global noise. Language-specific ignores live beside each package so
+# subtree mirror repos carry their own ignore rules.
+.DS_Store
+
+# Local agent/task state (tlc) — never ship.
+.tlc/
+
+# Runtime log dumps from tools/parity and emitter runs.
+logs/

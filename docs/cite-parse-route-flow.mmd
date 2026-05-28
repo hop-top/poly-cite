@@ -1,0 +1,30 @@
+---
+doc_type: engineering
+subtype: diagram
+status: draft
+title: URI Parse And Route Flow
+summary: Mermaid flowchart for URI parsing, namespace policy selection, and registry routing.
+owner: Idea Crafters Labs
+created: 2026-05-13
+updated: 2026-05-14
+audience:
+  - developers
+  - tool_authors
+  - oss_contributors
+  - ai_assistant
+confidentiality: public
+tags:
+  - cite
+  - diagram
+  - mermaid
+---
+flowchart TD
+    A[Input URI] --> B{Has scheme?}
+    B -->|No| X[Reject]
+    B -->|Yes| C[Select namespace policy]
+    C --> D{Enough path segments?}
+    D -->|No| X
+    D -->|Yes| E[Split namespace and id]
+    E --> F[Preserve query and fragment]
+    F --> G[Return canonical URI model]
+    G --> H[Registry selects type handler]

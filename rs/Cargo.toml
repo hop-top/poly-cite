@@ -1,0 +1,25 @@
+[package]
+name = "hop-top-cite"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Custom URI scheme utilities (polyglot)."
+repository = "https://github.com/hop-top/cite-rs"
+homepage = "https://hop.top/cite"
+documentation = "https://github.com/hop-top/poly-cite/tree/main/docs/specs"
+readme = "README.md"
+include = [
+  "Cargo.toml",
+  "Cargo.lock",
+  "README.md",
+  "src/**",
+  "tests/**",
+  "../spec/fixtures/**",
+]
+
+[dependencies]
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+url = "2.5.8"
+
+[dev-dependencies]
