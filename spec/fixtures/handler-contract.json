@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "name": "go task handler identity",
+      "platform": "linux",
+      "spec": {
+        "vendor": "hop-top",
+        "app": "scheme",
+        "language": "go",
+        "scheme": "task",
+        "version": "0.2.0-alpha.0",
+        "channel": "alpha",
+        "appPath": "/usr/bin/task",
+        "displayName": "Hop Task Handler"
+      },
+      "expected": {
+        "handlerId": "hop-top.scheme.go.task",
+        "desktopFilename": "hop-top.scheme.go.task.desktop",
+        "renderedContains": [
+          "[Desktop Entry]",
+          "Name=Hop Task Handler",
+          "MimeType=x-scheme-handler/task",
+          "X-Hop-Handler-ID=hop-top.scheme.go.task"
+        ]
+      }
+    },
+    {
+      "name": "rust local instance handler identity",
+      "platform": "macos",
+      "spec": {
+        "vendor": "hop-top",
+        "app": "scheme",
+        "instance": "local-dev",
+        "language": "rs",
+        "scheme": "task",
+        "version": "0.2.0-alpha.0",
+        "channel": "alpha",
+        "appPath": "/Applications/Hop Task.app",
+        "displayName": "Hop Task Handler"
+      },
+      "expected": {
+        "handlerId": "hop-top.scheme.local-dev.rs.task",
+        "renderedContains": [
+          "CFBundleURLName",
+          "hop-top.scheme.local-dev.rs.task",
+          "CFBundleURLSchemes",
+          "task"
+        ]
+      }
+    },
+    {
+      "name": "windows handler includes metadata",
+      "platform": "windows",
+      "spec": {
+        "vendor": "hop-top",
+        "app": "scheme",
+        "language": "go",
+        "scheme": "task",
+        "version": "0.2.0-alpha.0",
+        "channel": "alpha",
+        "appPath": "C:\\Program Files\\task\\task.exe",
+        "displayName": "Hop Task Handler"
+      },
+      "expected": {
+        "handlerId": "hop-top.scheme.go.task",
+        "renderedContains": [
+          "Windows Registry Editor Version 5.00",
+          "Software\\Classes\\task",
+          "HopHandlerID",
+          "hop-top.scheme.go.task"
+        ]
+      }
+    }
+  ],
+  "invalidCases": [
+    {
+      "name": "missing vendor",
+      "spec": {
+        "app": "scheme",
+        "language": "go",
+        "scheme": "task",
+        "appPath": "/usr/bin/task"
+      }
+    },
+    {
+      "name": "unsupported language",
+      "spec": {
+        "vendor": "hop-top",
+        "app": "scheme",
+        "language": "ruby",
+        "scheme": "task",
+        "appPath": "/usr/bin/task"
+      }
+    },
+    {
+      "name": "path separator in app",
+      "spec": {
+        "vendor": "hop-top",
+        "app": "bad/app",
+        "language": "go",
+        "scheme": "task",
+        "appPath": "/usr/bin/task"
+      }
+    }
+  ]
+}

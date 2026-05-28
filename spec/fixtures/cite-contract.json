@@ -1,0 +1,256 @@
+{
+  "version": 1,
+  "namespacePolicy": {
+    "defaultNamespaceSegments": 1,
+    "schemeNamespaceSegments": {
+      "task": 2,
+      "doc": 2,
+      "repo": 1,
+      "tlc": 2,
+      "task-dev": 2,
+      "task-stress": 2
+    }
+  },
+  "validCases": [
+    {
+      "name": "task object in repo namespace",
+      "input": "task://hop-top/cite/T-0001",
+      "expected": {
+        "scheme": "task",
+        "namespace": "hop-top/cite",
+        "id": "T-0001"
+      },
+      "canonical": "task://hop-top/cite/T-0001"
+    },
+    {
+      "name": "repo object uses one namespace segment",
+      "input": "repo://hop-top/cite",
+      "expected": {
+        "scheme": "repo",
+        "namespace": "hop-top",
+        "id": "cite"
+      },
+      "canonical": "repo://hop-top/cite"
+    },
+    {
+      "name": "doc id may contain slashes",
+      "input": "doc://ideacrafters/kit/docs/adopters/quickstart",
+      "expected": {
+        "scheme": "doc",
+        "namespace": "ideacrafters/kit",
+        "id": "docs/adopters/quickstart"
+      },
+      "canonical": "doc://ideacrafters/kit/docs/adopters/quickstart"
+    },
+    {
+      "name": "schema version is query metadata",
+      "input": "task://hop-top/cite/T-0001?schema=2",
+      "expected": {
+        "scheme": "task",
+        "namespace": "hop-top/cite",
+        "id": "T-0001",
+        "query": "schema=2"
+      },
+      "canonical": "task://hop-top/cite/T-0001?schema=2"
+    },
+    {
+      "name": "stress mode is query metadata",
+      "input": "task://hop-top/cite/T-0001?mode=stress&handler=go",
+      "expected": {
+        "scheme": "task",
+        "namespace": "hop-top/cite",
+        "id": "T-0001",
+        "query": "mode=stress&handler=go"
+      },
+      "canonical": "task://hop-top/cite/T-0001?mode=stress&handler=go"
+    },
+    {
+      "name": "fragment is preserved as metadata",
+      "input": "doc://ideacrafters/kit/docs/spec#section-2",
+      "expected": {
+        "scheme": "doc",
+        "namespace": "ideacrafters/kit",
+        "id": "docs/spec",
+        "fragment": "section-2"
+      },
+      "canonical": "doc://ideacrafters/kit/docs/spec#section-2"
+    },
+    {
+      "name": "dev scheme is an OS routing separation",
+      "input": "task-dev://hop-top/cite/T-0001",
+      "expected": {
+        "scheme": "task-dev",
+        "namespace": "hop-top/cite",
+        "id": "T-0001"
+      },
+      "canonical": "task-dev://hop-top/cite/T-0001"
+    },
+    {
+      "name": "stress scheme is an OS routing separation",
+      "input": "task-stress://hop-top/cite/T-0001",
+      "expected": {
+        "scheme": "task-stress",
+        "namespace": "hop-top/cite",
+        "id": "T-0001"
+      },
+      "canonical": "task-stress://hop-top/cite/T-0001"
+    }
+  ],
+  "invalidCases": [
+    {
+      "name": "empty input",
+      "input": ""
+    },
+    {
+      "name": "missing scheme",
+      "input": "hop-top/cite/T-0001"
+    },
+    {
+      "name": "empty namespace",
+      "input": "task:///T-0001"
+    },
+    {
+      "name": "missing id",
+      "input": "task://hop-top/cite"
+    },
+    {
+      "name": "repo missing id",
+      "input": "repo://hop-top"
+    },
+    {
+      "name": "unknown scheme has insufficient id",
+      "input": "unknown://namespace"
+    }
+  ],
+  "vanityCases": [
+    {
+      "name": "exact vanity alias resolves to canonical target",
+      "input": "task://my-custom-slug/path-optional",
+      "aliases": [
+        {
+          "from": "task://my-custom-slug/path-optional",
+          "to": "task://hop-top/cite/T-0001"
+        }
+      ],
+      "valid": true,
+      "expected": {
+        "scheme": "task",
+        "namespace": "hop-top/cite",
+        "id": "T-0001",
+        "original": "task://my-custom-slug/path-optional"
+      },
+      "canonical": "task://hop-top/cite/T-0001"
+    },
+    {
+      "name": "prefix vanity alias preserves suffix when configured",
+      "input": "task://shortcut/child",
+      "aliases": [
+        {
+          "from": "task://shortcut",
+          "to": "task://hop-top/cite/T-0001",
+          "prefix": true,
+          "preserveSuffix": true
+        }
+      ],
+      "valid": true,
+      "expected": {
+        "scheme": "task",
+        "namespace": "hop-top/cite",
+        "id": "T-0001/child",
+        "original": "task://shortcut/child"
+      },
+      "canonical": "task://hop-top/cite/T-0001/child"
+    },
+    {
+      "name": "fuzzy vanity alias resolves closest target",
+      "input": "task://my-custom-slg/path-optional",
+      "aliases": [
+        {
+          "from": "task://my-custom-slug/path-optional",
+          "to": "task://hop-top/cite/T-0001"
+        }
+      ],
+      "valid": true,
+      "expected": {
+        "scheme": "task",
+        "namespace": "hop-top/cite",
+        "id": "T-0001",
+        "original": "task://my-custom-slg/path-optional"
+      },
+      "canonical": "task://hop-top/cite/T-0001"
+    },
+    {
+      "name": "strict vanity matching does not use fuzzy fallback",
+      "input": "task://my-custom-slg/path-optional",
+      "aliases": [
+        {
+          "from": "task://my-custom-slug/path-optional",
+          "to": "task://hop-top/cite/T-0001"
+        }
+      ],
+      "options": {
+        "strict": true
+      },
+      "valid": false
+    }
+  ],
+  "actionCases": [
+    {
+      "name": "canonical action query resolves to command plan",
+      "input": "tlc://org/repo/T-0001?action=task.claim",
+      "actionRoutes": {
+        "task.claim": {
+          "command": "tlc",
+          "args": ["-C", "{namespace}", "task", "claim", "{id}"]
+        }
+      },
+      "expected": {
+        "scheme": "tlc",
+        "namespace": "org/repo",
+        "id": "T-0001",
+        "action": "task.claim"
+      },
+      "canonical": "tlc://org/repo/T-0001?action=task.claim",
+      "command": "tlc",
+      "args": ["-C", "org/repo", "task", "claim", "T-0001"]
+    },
+    {
+      "name": "cmd verb query alias normalizes to action",
+      "input": "tlc://org/repo/T-0001?cmd=task&verb=claim",
+      "actionRoutes": {
+        "task.claim": {
+          "command": "tlc",
+          "args": ["-C", "{namespace}", "task", "claim", "{id}"]
+        }
+      },
+      "expected": {
+        "scheme": "tlc",
+        "namespace": "org/repo",
+        "id": "T-0001",
+        "action": "task.claim"
+      },
+      "canonical": "tlc://org/repo/T-0001?cmd=task&verb=claim",
+      "command": "tlc",
+      "args": ["-C", "org/repo", "task", "claim", "T-0001"]
+    },
+    {
+      "name": "name action query alias normalizes to action",
+      "input": "tlc://org/repo/T-0001?name=task&action=claim",
+      "actionRoutes": {
+        "task.claim": {
+          "command": "tlc",
+          "args": ["-C", "{namespace}", "task", "claim", "{id}"]
+        }
+      },
+      "expected": {
+        "scheme": "tlc",
+        "namespace": "org/repo",
+        "id": "T-0001",
+        "action": "task.claim"
+      },
+      "canonical": "tlc://org/repo/T-0001?name=task&action=claim",
+      "command": "tlc",
+      "args": ["-C", "org/repo", "task", "claim", "T-0001"]
+    }
+  ]
+}

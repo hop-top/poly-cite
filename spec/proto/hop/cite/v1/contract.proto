@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package hop.cite.v1;
+
+option go_package = "hop.top/cite/internal/proto/hop/cite/v1;citev1";
+
+message URI {
+  string scheme = 1;
+  string namespace = 2;
+  string id = 3;
+  string query = 4;
+  string fragment = 5;
+  string original = 6;
+  string action = 7;
+}
+
+message NamespacePolicy {
+  uint32 default_namespace_segments = 1;
+  map<string, uint32> scheme_namespace_segments = 2;
+}
+
+message ActionRoute {
+  string command = 1;
+  repeated string args = 2;
+}
+
+message ParseOptions {
+  bool strict = 1;
+  bool json_ambiguity = 2;
+}
+
+message VanityAlias {
+  string from = 1;
+  string to = 2;
+  bool prefix = 3;
+  bool preserve_suffix = 4;
+}
+
+message URIValidCase {
+  string name = 1;
+  string input = 2;
+  URI expected = 3;
+  string canonical = 4;
+}
+
+message URIInvalidCase {
+  string name = 1;
+  string input = 2;
+}
+
+message VanityCase {
+  string name = 1;
+  string input = 2;
+  repeated VanityAlias aliases = 3;
+  ParseOptions options = 4;
+  bool valid = 5;
+  URI expected = 6;
+  string canonical = 7;
+}
+
+message ActionCase {
+  string name = 1;
+  string input = 2;
+  map<string, ActionRoute> action_routes = 3;
+  URI expected = 4;
+  string canonical = 5;
+  string command = 6;
+  repeated string args = 7;
+}
+
+message URIContractFixture {
+  uint32 version = 1;
+  NamespacePolicy namespace_policy = 2;
+  repeated URIValidCase valid_cases = 3;
+  repeated URIInvalidCase invalid_cases = 4;
+  repeated VanityCase vanity_cases = 5;
+  repeated ActionCase action_cases = 6;
+}
+
+message HandlerSpec {
+  string vendor = 1;
+  string app = 2;
+  string instance = 3;
+  string language = 4;
+  string scheme = 5;
+  string version = 6;
+  string channel = 7;
+  string app_path = 8;
+  string display_name = 9;
+}
+
+message HandlerExpected {
+  string handler_id = 1;
+  string desktop_filename = 2;
+  repeated string rendered_contains = 3;
+}
+
+message HandlerCase {
+  string name = 1;
+  string platform = 2;
+  HandlerSpec spec = 3;
+  HandlerExpected expected = 4;
+}
+
+message HandlerInvalidCase {
+  string name = 1;
+  HandlerSpec spec = 2;
+}
+
+message HandlerContractFixture {
+  uint32 version = 1;
+  repeated HandlerCase cases = 2;
+  repeated HandlerInvalidCase invalid_cases = 3;
+}

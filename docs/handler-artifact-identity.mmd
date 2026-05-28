@@ -1,0 +1,31 @@
+---
+doc_type: engineering
+subtype: diagram
+status: draft
+title: Handler Artifact Identity
+summary: Mermaid flowchart for handler identity inputs and generated OS-specific artifacts.
+owner: Idea Crafters Labs
+created: 2026-05-13
+updated: 2026-05-14
+audience:
+  - developers
+  - tool_authors
+  - oss_contributors
+  - ai_assistant
+confidentiality: public
+tags:
+  - cite
+  - handler
+  - diagram
+  - mermaid
+---
+flowchart LR
+    Vendor[Vendor] --> ID[Handler ID]
+    App[App] --> ID
+    Instance[Optional instance] --> ID
+    Language[Language suffix] --> ID
+    Scheme[Scheme] --> ID
+    ID --> Mac[macOS CFBundleURLName]
+    ID --> Linux[Linux desktop filename]
+    ID --> Windows[Windows display metadata]
+    Scheme --> WindowsKey[Windows scheme registry key]
