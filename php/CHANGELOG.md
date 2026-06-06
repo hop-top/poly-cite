@@ -5,11 +5,11 @@
 
 ### ⚠ BREAKING CHANGES
 
-* **php:** PHP namespace Hop\Cite renamed to HopTop\Cite.
+* **php:** PHP namespace `Hop\Cite` renamed to `HopTop\Cite`.
 
 ### Refactoring
 
-* **php:** rename namespace Hop\Cite to HopTop\Cite ([#13](https://github.com/hop-top/poly-cite/issues/13)) ([90108b8](https://github.com/hop-top/poly-cite/commit/90108b8865863ecbe357f12647338e6ab5b93da4))
+* **php:** rename namespace `Hop\Cite` to `HopTop\Cite` ([#13](https://github.com/hop-top/poly-cite/issues/13)) ([90108b8](https://github.com/hop-top/poly-cite/commit/90108b8865863ecbe357f12647338e6ab5b93da4))
 
 ## 0.1.0 (2026-05-28)
 
