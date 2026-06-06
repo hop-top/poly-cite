@@ -12,16 +12,18 @@
   },
   "autoload": {
     "psr-4": {
-      "Hop\\Cite\\": "src/"
+      "HopTop\\Cite\\": "src/"
     },
     "files": [
       "src/Scheme.php",
-      "src/Handle.php"
+      "src/Handle.php",
+      "src/Registry.php",
+      "src/Completions.php"
     ]
   },
   "autoload-dev": {
     "psr-4": {
-      "Hop\\Cite\\Tests\\": "tests/"
+      "HopTop\\Cite\\Tests\\": "tests/"
     }
   },
   "scripts": {

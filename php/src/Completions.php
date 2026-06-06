@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hop\Cite;
+namespace HopTop\Cite;
 
 final class CompletionResult {
     /** @param list<string> $suggestions */
