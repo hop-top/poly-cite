@@ -2,7 +2,14 @@ name: publish
 
 on:
   push:
-    tags: ['*/v*']
+    # Sub-component tags (cite/v*, cite-ts/v*, …) trigger publish.
+    # `poly-cite/v*` is release-please's umbrella tag aggregating
+    # breaking-change notes; it has no language package to publish
+    # (the reusable workflow rejects unknown components with
+    # `Unknown component 'poly-cite'`). Skip it explicitly.
+    tags:
+      - '*/v*'
+      - '!poly-cite/v*'
 
 jobs:
   publish:
