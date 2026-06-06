@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Hop\Cite\Tests;
+namespace HopTop\Cite\Tests;
 
-use Hop\Cite\ActionRoute;
-use Hop\Cite\AmbiguousVanityException;
-use Hop\Cite\Completions;
-use Hop\Cite\Handle;
-use Hop\Cite\HandlerSpec;
-use Hop\Cite\Policy;
-use Hop\Cite\ParseOptions;
-use Hop\Cite\Registry;
-use Hop\Cite\TypeRegistration;
-use Hop\Cite\Scheme;
-use Hop\Cite\VanityAlias;
+use HopTop\Cite\ActionRoute;
+use HopTop\Cite\AmbiguousVanityException;
+use HopTop\Cite\Completions;
+use HopTop\Cite\Handle;
+use HopTop\Cite\HandlerSpec;
+use HopTop\Cite\Policy;
+use HopTop\Cite\ParseOptions;
+use HopTop\Cite\Registry;
+use HopTop\Cite\TypeRegistration;
+use HopTop\Cite\Scheme;
+use HopTop\Cite\VanityAlias;
 use PHPUnit\Framework\TestCase;
 
 final class ContractTest extends TestCase {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hop\Cite;
+namespace HopTop\Cite;
 
 // Convenience file for manual requires. Composer autoload is preferred.
 require_once __DIR__ . "/Scheme.php";

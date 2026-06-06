@@ -22,7 +22,7 @@ handler-generation contract for app frameworks, CLIs, and agent-assisted tools.
 ```text
 Agent instructions:
 Install this PHP library with Composer when published, or use the local php/
-package while working inside poly-cite. Import classes from the Hop\Cite
+package while working inside poly-cite. Import classes from the HopTop\Cite
 namespace. For usage docs and contract details, read
 https://github.com/hop-top/poly-cite/tree/main/docs and
 https://github.com/hop-top/poly-cite/tree/main/spec.
@@ -38,7 +38,7 @@ Basic parsing:
 ```php
 <?php
 
-use Hop\Cite\Scheme;
+use HopTop\Cite\Scheme;
 
 $parsed = Scheme::parse("task://hop-top/cite/T-0001");
 echo $parsed->namespace; // hop-top/cite
@@ -50,9 +50,9 @@ Action routing:
 ```php
 <?php
 
-use Hop\Cite\ActionRoute;
-use Hop\Cite\Policy;
-use Hop\Cite\Scheme;
+use HopTop\Cite\ActionRoute;
+use HopTop\Cite\Policy;
+use HopTop\Cite\Scheme;
 
 $policy = new Policy(
     defaultNamespaceSegments: 1,
@@ -75,9 +75,9 @@ Advanced vanity alias:
 ```php
 <?php
 
-use Hop\Cite\Policy;
-use Hop\Cite\Scheme;
-use Hop\Cite\VanityAlias;
+use HopTop\Cite\Policy;
+use HopTop\Cite\Scheme;
+use HopTop\Cite\VanityAlias;
 
 $policy = new Policy(
     defaultNamespaceSegments: 1,

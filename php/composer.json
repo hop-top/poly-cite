@@ -12,7 +12,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Hop\\Cite\\": "src/"
+      "HopTop\\Cite\\": "src/"
     },
     "files": [
       "src/Scheme.php",
@@ -21,7 +21,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Hop\\Cite\\Tests\\": "tests/"
+      "HopTop\\Cite\\Tests\\": "tests/"
     }
   },
   "scripts": {
