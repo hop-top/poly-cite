@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 require __DIR__ . "/../../../php/vendor/autoload.php";
 
-use Hop\Cite\ActionRoute;
-use Hop\Cite\Handle;
-use Hop\Cite\HandlerSpec;
-use Hop\Cite\ParseOptions;
-use Hop\Cite\Policy;
-use Hop\Cite\Scheme;
-use Hop\Cite\VanityAlias;
+use HopTop\Cite\ActionRoute;
+use HopTop\Cite\Handle;
+use HopTop\Cite\HandlerSpec;
+use HopTop\Cite\ParseOptions;
+use HopTop\Cite\Policy;
+use HopTop\Cite\Scheme;
+use HopTop\Cite\VanityAlias;
 
 $fixtureDir = $argv[1] ?? "spec/fixtures";
 $citeFixture = json_decode(file_get_contents($fixtureDir . "/cite-contract.json"), true, flags: JSON_THROW_ON_ERROR);
