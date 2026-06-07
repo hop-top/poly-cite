@@ -30,7 +30,7 @@ completion, and OS handler registration.
 | --- | --- |
 | Understand the product | [PRD](prd.md) |
 | Understand the architecture | [Architecture](architecture.md) |
-| Make `<scheme>://` URLs open my app | [Registering a scheme](guides/registering-a-scheme.md) |
+| Make `<scheme>://` URLs open my app | [Make a custom URI scheme open your app](guides/registering-a-scheme.md) |
 | Implement or review URI parsing | [URI Contract](specs/cite-contract.md) |
 | Implement or review handler registration | [Handler Identity](specs/handler-identity.md) |
 | Understand decisions | [ADRs](adrs/) |

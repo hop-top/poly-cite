@@ -76,7 +76,7 @@ Each SDK has its own README with install + idiomatic examples:
 
 - [PRD](docs/prd.md) — what cite is for, who it's for
 - [Architecture](docs/architecture.md) — how the polyglot contract holds together
-- [Registering a scheme](docs/guides/registering-a-scheme.md) — make `<scheme>://` URLs open your app on Linux, macOS, iOS, Windows
+- [Make a custom URI scheme open your app](docs/guides/registering-a-scheme.md) — Linux, macOS, iOS, Windows install recipes
 - [URI contract](docs/specs/cite-contract.md) — formal parser spec
 - [Handler identity](docs/specs/handler-identity.md) — OS handler generation spec
 - [Glossary](docs/glossary.md) — terminology
