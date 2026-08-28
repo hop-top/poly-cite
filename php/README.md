@@ -15,6 +15,7 @@ handler-generation contract for app frameworks, CLIs, and agent-assisted tools.
 - Resolve action routes to command plans without executing them.
 - Register URI types with parsers and completers.
 - Generate language-scoped handler artifacts for Linux, macOS/iOS, and Windows.
+  ([guide](https://github.com/hop-top/poly-cite/blob/main/docs/guides/registering-a-scheme.md))
 - Validate behavior against shared polyglot contract fixtures.
 
 ## Usage
