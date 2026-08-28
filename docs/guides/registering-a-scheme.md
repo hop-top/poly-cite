@@ -6,7 +6,7 @@ title: Make a custom URI scheme open your app
 summary: Take a cite-generated handler artifact and register it with Linux, macOS, iOS, or Windows so `<scheme>://...` URLs route to your application.
 owner: Idea Crafters Labs
 created: 2026-06-06
-updated: 2026-06-06
+updated: 2026-08-27
 audience:
   - developers
   - tool_authors
