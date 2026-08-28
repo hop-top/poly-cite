@@ -232,7 +232,11 @@ import "hop.top/cite/handle"
 err := handle.Register("task", "/usr/bin/myapp")
 ```
 
-Writes the `.desktop` file and calls `xdg-mime` in one go. No CGO.
+Writes a `.desktop` file and calls `xdg-mime` in one go — no CGO. This is a
+simpler artifact than the `HandlerSpec` flow: the filename is
+`<scheme>-scheme-handler.desktop` (not `<handlerID>.desktop`), and it has no
+`X-Hop-Handler-ID` or vendor/app identity. Use the `HandlerSpec` flow instead
+if something else needs to identify your handler by ID.
 
 ---
 
@@ -241,12 +245,15 @@ Writes the `.desktop` file and calls `xdg-mime` in one go. No CGO.
 ### Quick path
 
 1. Generate the snippet with `platform: "macos"`.
-2. Merge into your `.app`'s `Contents/Info.plist`. The SDKs ship a `patchPlist` /
-   `patch_plist` / `PatchPlist` helper that does this:
+2. Merge into your `.app`'s `Contents/Info.plist`. Go, Python, Rust, and PHP
+   ship a `PatchPlist` / `patch_plist` / `patchPlist` helper that does this:
 
    ```go
    out, err := generate.PatchPlist(srcInfoPlistReader, spec)
    ```
+
+   TypeScript only exposes `plistSnippet` — insert it into `Info.plist`
+   yourself, before `</dict>\n</plist>`.
 
 3. Ship the updated bundle. Launch Services registers it on first run, or
    manually:
@@ -348,13 +355,17 @@ reg import myapp.reg
 
 Or double-click the `.reg` file in Explorer. Per-user (`HKCU`); no UAC prompt.
 
+The registry's `URL:<name> Protocol` string defaults to the full handler ID
+(`hop-top.myapp.go.task`) unless `DisplayName` is set on the `HandlerSpec` —
+set it if you want a human-readable name instead.
+
 ### What the snippet looks like
 
 ```reg
 Windows Registry Editor Version 5.00
 
 [HKEY_CURRENT_USER\Software\Classes\task]
-@="URL:task Protocol"
+@="URL:hop-top.myapp.go.task Protocol"
 "URL Protocol"=""
 "FriendlyTypeName"="hop-top.myapp.go.task"
 "HopHandlerID"="hop-top.myapp.go.task"
@@ -367,7 +378,7 @@ Windows Registry Editor Version 5.00
 
 ```cmd
 reg query HKCU\Software\Classes\task /ve
-:: expected: (Default) REG_SZ URL:task Protocol
+:: expected: (Default) REG_SZ URL:hop-top.myapp.go.task Protocol
 
 start task://hop-top/cite/T-0001
 :: expected: myapp.exe launches with the URL as argv[1]
@@ -393,7 +404,9 @@ UAC.
 err := handle.Register("task", `C:\Program Files\MyApp\myapp.exe`)
 ```
 
-Writes the same `HKCU` keys directly. Per-user, no UAC.
+Writes the minimum `HKCU` keys directly (default value, `URL Protocol`, open
+command) — no `FriendlyTypeName` or `HopHandlerID`. Per-user, no UAC. For the
+full artifact with identity metadata, use `generate.WindowsRegSnippet` instead.
 
 ---
 
