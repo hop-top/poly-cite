@@ -1,0 +1,37 @@
+# Build context excludes for devcontainer image builds. Keeps VCS internals,
+# dependency caches, and per-language build output out of the context.
+
+# VCS and editor noise.
+.git/
+.gitignore
+.DS_Store
+
+# Local agent/task state (tlc) — never ship.
+.tlc/
+
+# Runtime log dumps from tools/parity and emitter runs.
+logs/
+
+# Devcontainer feature lockfile — regenerated on every container build.
+.devcontainer/devcontainer-lock.json
+
+# Dependency caches and build output. Reinstalled by post-create.sh.
+go/bin/
+go/dist/
+ts/node_modules/
+ts/dist/
+ts/build/
+ts/coverage/
+*.tsbuildinfo
+py/dist/
+py/build/
+py/*.egg-info/
+py/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+rs/target/
+php/vendor/
+php/coverage/
+.phpunit.result.cache

@@ -7,3 +7,6 @@
 
 # Runtime log dumps from tools/parity and emitter runs.
 logs/
+
+# Devcontainer feature lockfile — regenerated on every container build.
+.devcontainer/devcontainer-lock.json
