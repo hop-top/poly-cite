@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/hop-top/poly-cite/compare/poly-cite/v0.2.0...poly-cite/v0.3.0) (2026-08-29)
+
+
+### Features
+
+* **devcontainer:** add five-toolchain devcontainer ([#20](https://github.com/hop-top/poly-cite/issues/20)) ([bed4452](https://github.com/hop-top/poly-cite/commit/bed44527d3b648092677798894c79f36bb56b9b3))
+
+
+### Bug Fixes
+
+* **release:** stop creating GitHub Releases in this monorepo ([#18](https://github.com/hop-top/poly-cite/issues/18)) ([c73c2e6](https://github.com/hop-top/poly-cite/commit/c73c2e65aefe1cfd7f118c2925d6d962f0694f04))
+
 ## [0.2.0](https://github.com/hop-top/poly-cite/compare/poly-cite/v0.1.0...poly-cite/v0.2.0) (2026-06-06)
 
 
