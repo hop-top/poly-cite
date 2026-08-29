@@ -13,6 +13,18 @@ keep Go, TypeScript, Python, Rust, and PHP aligned.
 6. Commit using Conventional Commits.
 7. Push and open a pull request.
 
+## Development Setup
+
+See [`.devcontainer/README.md`](.devcontainer/README.md) for environment setup,
+including the devcontainer that provides all five toolchains at the versions CI
+uses.
+
+Quick start:
+
+```sh
+make setup
+```
+
 ## Development Areas
 
 | Area | Path |

@@ -1,12 +1,15 @@
 .PHONY: help setup test test-go test-ts test-py test-rs test-php test-parity \
 	build build-go build-ts build-py build-rs build-php \
 	package package-go package-ts package-py package-rs package-php \
-	lint lint-docs lint-rs lint-py lint-whitespace check clean
+	lint lint-docs lint-rs lint-py lint-whitespace check clean \
+	devcontainer-build devcontainer-check devcontainer-shell devcontainer-clean
 
 PYTHON ?= python3
 PNPM ?= pnpm
 COMPOSER ?= composer
 GOCACHE ?= /tmp/cite-go-build
+DEVCONTAINER ?= devcontainer
+DEVCONTAINER_LABEL ?= poly-cite-dev
 
 help: ## Show available targets
 	@awk 'BEGIN {FS = ":.*## "; printf "Targets:\n"} /^[a-zA-Z0-9_-]+:.*## / {printf "  %-18s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -99,6 +102,19 @@ lint-py: ## Check Python syntax without writing pycache into user cache dirs
 
 lint-whitespace: ## Check whitespace and conflict-marker issues in the git diff
 	git diff --check
+
+devcontainer-build: ## Build the devcontainer image and run postCreate
+	$(DEVCONTAINER) up --workspace-folder . --id-label $(DEVCONTAINER_LABEL)=1
+
+devcontainer-check: devcontainer-build ## Run the full check suite inside the devcontainer
+	$(DEVCONTAINER) exec --workspace-folder . --id-label $(DEVCONTAINER_LABEL)=1 make check
+
+devcontainer-shell: devcontainer-build ## Open a shell inside the devcontainer
+	$(DEVCONTAINER) exec --workspace-folder . --id-label $(DEVCONTAINER_LABEL)=1 bash
+
+devcontainer-clean: ## Remove the devcontainer container created by devcontainer-build
+	@docker ps -aq --filter "label=$(DEVCONTAINER_LABEL)=1" \
+		| xargs -r docker rm -f
 
 clean: ## Remove generated local build artifacts
 	rm -rf py/dist py/*.egg-info rs/target ts/dist php/vendor
