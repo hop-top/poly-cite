@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/hop-top/poly-cite/compare/cite-ts/v0.1.1...cite-ts/v0.1.2) (2026-08-30)
+
+
+### Bug Fixes
+
+* **ts:** add repository field for npm provenance ([#40](https://github.com/hop-top/poly-cite/issues/40)) ([655ebfa](https://github.com/hop-top/poly-cite/commit/655ebfa6b8fa96cb25e677668e0bf967eb1d9e90))
+
 ## [0.1.1](https://github.com/hop-top/poly-cite/compare/cite-ts/v0.1.0...cite-ts/v0.1.1) (2026-08-30)
 
 
