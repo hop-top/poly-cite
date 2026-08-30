@@ -23,44 +23,38 @@
       "component": "poly-cite",
       "changelog-path": "CHANGELOG.md",
       "bump-minor-pre-major": true,
-      "exclude-paths": ["go", "ts", "py", "rs", "php"],
-      "skip-github-release": true
+      "exclude-paths": ["go", "ts", "py", "rs", "php"]
     },
     "go": {
       "release-type": "go",
       "component": "cite",
       "changelog-path": "CHANGELOG.md",
-      "bump-minor-pre-major": true,
-      "skip-github-release": true
+      "bump-minor-pre-major": true
     },
     "ts": {
       "release-type": "node",
       "component": "cite-ts",
       "changelog-path": "CHANGELOG.md",
-      "bump-minor-pre-major": true,
-      "skip-github-release": true
+      "bump-minor-pre-major": true
     },
     "py": {
       "release-type": "python",
       "component": "cite-py",
       "package-name": "hop-top-cite",
       "changelog-path": "CHANGELOG.md",
-      "bump-minor-pre-major": true,
-      "skip-github-release": true
+      "bump-minor-pre-major": true
     },
     "rs": {
       "release-type": "rust",
       "component": "cite-rs",
       "changelog-path": "CHANGELOG.md",
-      "bump-minor-pre-major": true,
-      "skip-github-release": true
+      "bump-minor-pre-major": true
     },
     "php": {
       "release-type": "php",
       "component": "cite-php",
       "changelog-path": "CHANGELOG.md",
-      "bump-minor-pre-major": true,
-      "skip-github-release": true
+      "bump-minor-pre-major": true
     }
   }
 }
