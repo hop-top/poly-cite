@@ -2,6 +2,11 @@
   "name": "@hop-top/cite",
   "version": "0.1.1",
   "homepage": "https://hop.top/cite",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hop-top/poly-cite.git",
+    "directory": "ts"
+  },
   "type": "commonjs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
