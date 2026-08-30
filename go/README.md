@@ -3,7 +3,8 @@
 Go implementation of `cite`, the polyglot custom URI parsing and
 handler-generation contract for app frameworks, CLIs, and agent-assisted tools.
 
-> This repository is a read-only language mirror. Open issues and pull requests
+> This repository is a read-only language mirror, republished from the
+> `hop-top/poly-cite` monorepo on each release. Open issues and pull requests
 > in [`hop-top/poly-cite`](https://github.com/hop-top/poly-cite).
 
 ## Features
