@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/hop-top/poly-cite/compare/poly-cite/v0.3.1...poly-cite/v0.3.2) (2026-08-30)
+
+
+### Bug Fixes
+
+* **release:** add missing space to release PR title pattern ([#23](https://github.com/hop-top/poly-cite/issues/23)) ([f03e635](https://github.com/hop-top/poly-cite/commit/f03e6355ddc1057c736084a6bf64e0093d303d16))
+
 ## [0.3.1](https://github.com/hop-top/poly-cite/compare/poly-cite/v0.3.0...poly-cite/v0.3.1) (2026-08-30)
 
 
