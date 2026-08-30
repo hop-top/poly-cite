@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/hop-top/poly-cite/compare/poly-cite/v0.3.0...poly-cite/v0.3.1) (2026-08-30)
+
+
+### Bug Fixes
+
+* **release:** add workflow_dispatch to release-please ([#21](https://github.com/hop-top/poly-cite/issues/21)) ([f7d1872](https://github.com/hop-top/poly-cite/commit/f7d187233a667b1fe05afd98874c3e4557f155fa))
+
 ## [0.3.0](https://github.com/hop-top/poly-cite/compare/poly-cite/v0.2.0...poly-cite/v0.3.0) (2026-08-29)
 
 
