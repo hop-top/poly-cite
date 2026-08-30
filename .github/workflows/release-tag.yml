@@ -1,20 +1,9 @@
 name: release-tag
 
-# Companion to skip-github-release. This repo suppresses GitHub Releases
-# (they belong on the per-language mirrors, created by mirror-subtree on
-# tag push), but release-please only creates tags AS PART OF creating a
-# Release — with skip-github-release it creates neither, leaves the
-# release PR labelled status:release-pending, and every later run aborts
-# with "untagged, merged release PRs outstanding"
-# (googleapis/release-please#1561; tag-only mode is an open feature
-# request, release-please-action#1034).
-#
-# So on merge of a release-please PR this workflow does the two things
-# release-please skips: push the component tag at the merge commit and
-# flip the PR label. The tag is pushed with GH_RELEASE_PLEASE_PAT — a
-# tag created with the workflow's own GITHUB_TOKEN would NOT trigger
-# publish.yml (GitHub suppresses workflow-triggering for events created
-# by the default token).
+# Companion to skip-github-release: this repo suppresses monorepo GitHub
+# Releases (they live on the per-language mirrors), so release-please
+# never tags. The reusable does the two skipped steps on release-PR
+# merge. Details: hop-top/.github references/how-to/release-free-monorepo.md
 
 on:
   pull_request:
@@ -27,65 +16,8 @@ jobs:
   tag:
     if: >
       github.event.pull_request.merged == true &&
-      startsWith(github.event.pull_request.head.ref, 'release-please--branches--main--components--') &&
-      contains(github.event.pull_request.labels.*.name, 'status:release-pending')
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.merge_commit_sha }}
-          persist-credentials: false
-
-      - name: Derive tag from release config + manifest
-        id: derive
-        env:
-          HEAD_REF: ${{ github.event.pull_request.head.ref }}
-        run: |
-          set -euo pipefail
-          COMPONENT="${HEAD_REF#release-please--branches--main--components--}"
-          CONFIG=.github/release-please-config.json
-          MANIFEST=.github/.release-please-manifest.json
-
-          PKG_PATH=$(jq -r --arg c "$COMPONENT" \
-            '.packages | to_entries[] | select(.value.component == $c) | .key' "$CONFIG")
-          if [ -z "$PKG_PATH" ] || [ "$PKG_PATH" = "null" ]; then
-            echo "::error::no package in $CONFIG has component '$COMPONENT'"
-            exit 1
-          fi
-
-          VERSION=$(jq -r --arg p "$PKG_PATH" '.[$p]' "$MANIFEST")
-          if [ -z "$VERSION" ] || [ "$VERSION" = "null" ]; then
-            echo "::error::manifest has no version for path '$PKG_PATH'"
-            exit 1
-          fi
-
-          SEP=$(jq -r '."tag-separator" // "-"' "$CONFIG")
-          TAG="${COMPONENT}${SEP}v${VERSION}"
-          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
-          echo "Derived tag: $TAG (component=$COMPONENT path=$PKG_PATH version=$VERSION)"
-
-      - name: Push tag (idempotent)
-        env:
-          GH_TOKEN: ${{ secrets.GH_RELEASE_PLEASE_PAT }}
-          TAG: ${{ steps.derive.outputs.tag }}
-          SHA: ${{ github.event.pull_request.merge_commit_sha }}
-        run: |
-          set -euo pipefail
-          if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" >/dev/null 2>&1; then
-            echo "Tag ${TAG} already exists — skipping create"
-          else
-            gh api "repos/${GITHUB_REPOSITORY}/git/refs" \
-              -f ref="refs/tags/${TAG}" -f sha="${SHA}"
-            echo "Created ${TAG} at ${SHA}"
-          fi
-
-      - name: Flip release PR label
-        env:
-          GH_TOKEN: ${{ secrets.GH_RELEASE_PLEASE_PAT }}
-          PR: ${{ github.event.pull_request.number }}
-        run: |
-          set -euo pipefail
-          gh pr edit "$PR" --repo "$GITHUB_REPOSITORY" \
-            --remove-label "status:release-pending" \
-            --add-label "status:release-tagged"
-          echo "PR #$PR labelled status:release-tagged"
+      startsWith(github.event.pull_request.head.ref, 'release-please--branches--')
+    uses: hop-top/.github/.github/workflows/release-tag-on-merge.yml@v0
+    secrets:
+      RELEASE_BOT_APP_ID: ${{ secrets.RELEASE_BOT_APP_ID }}
+      RELEASE_BOT_PRIVATE_KEY: ${{ secrets.RELEASE_BOT_PRIVATE_KEY }}
