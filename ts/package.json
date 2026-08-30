@@ -1,6 +1,6 @@
 {
   "name": "@hop-top/cite",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://hop.top/cite",
   "type": "commonjs",
   "main": "dist/index.js",
