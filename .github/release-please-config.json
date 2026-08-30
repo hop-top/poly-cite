@@ -46,13 +46,6 @@
       "package-name": "hop-top-cite",
       "changelog-path": "CHANGELOG.md",
       "bump-minor-pre-major": true,
-      "extra-files": [
-        {
-          "type": "toml",
-          "path": "pyproject.toml",
-          "jsonpath": "$.project.version"
-        }
-      ],
       "skip-github-release": true
     },
     "rs": {
