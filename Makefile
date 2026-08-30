@@ -1,7 +1,7 @@
 .PHONY: help setup test test-go test-ts test-py test-rs test-php test-parity \
 	build build-go build-ts build-py build-rs build-php \
 	package package-go package-ts package-py package-rs package-php \
-	lint lint-docs lint-rs lint-py lint-whitespace check clean \
+	lint lint-docs lint-go lint-rs lint-py lint-whitespace check clean \
 	devcontainer-build devcontainer-check devcontainer-shell devcontainer-clean
 
 PYTHON ?= python3
@@ -74,7 +74,15 @@ package-rs: ## Validate Rust package contents
 package-php: ## Validate PHP package metadata
 	cd php && $(COMPOSER) validate --strict
 
-lint: lint-docs lint-rs lint-py lint-whitespace ## Run available linters
+lint: lint-docs lint-go lint-rs lint-py lint-whitespace ## Run available linters
+
+lint-go: ## Run go vet and golangci-lint (soft-skips if not installed)
+	cd go && env -u GOROOT GOCACHE=$(GOCACHE) go vet ./...
+	@if command -v golangci-lint >/dev/null 2>&1; then \
+		cd go && env -u GOROOT GOCACHE=$(GOCACHE) GOFLAGS=-buildvcs=false golangci-lint run; \
+	else \
+		echo "lint-go: golangci-lint not installed; 'mise install' to enable"; \
+	fi
 
 lint-docs: ## Validate docs frontmatter spacing and required keys
 	@bad=0; \

@@ -142,7 +142,7 @@ func emitURIInvalid(cases []simpleURICase, policy scheme.Policy) []uriCaseOut {
 	out := make([]uriCaseOut, 0, len(cases))
 	for _, tc := range cases {
 		got := parseCase(tc.Name, tc.Input, policy)
-		got.OK = got.OK == false
+		got.OK = !got.OK
 		got.URI = nil
 		out = append(out, got)
 	}
