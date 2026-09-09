@@ -124,3 +124,6 @@ feature to `chore:` to avoid a release bump.
 
 Be respectful, specific, and constructive. Focus reviews on correctness,
 maintainability, and cross-language parity.
+
+This project follows the
+[hop-top Code of Conduct](https://github.com/hop-top/.github/blob/main/CODE_OF_CONDUCT.md).
