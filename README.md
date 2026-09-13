@@ -4,6 +4,8 @@ Polyglot toolkit for custom URI schemes: parse, validate, register, and
 complete `<scheme>://<namespace>/<id>` URIs from Go, TypeScript, Python,
 Rust, and PHP — with a shared contract that keeps all 5 SDKs in lockstep.
 
+> **Status:** Active development. Usable today, with some rough edges as features evolve.
+
 ## Install
 
 ```sh
@@ -84,8 +86,7 @@ Each SDK has its own README with install + idiomatic examples:
 
 ## Status
 
-Pre-1.0. API may shift across minor versions until 1.0. The
-cross-language contract is enforced by `make test-parity` — any
+The cross-language contract is enforced by `make test-parity` — any
 breaking change to the contract is gated on all 5 SDKs.
 
 ## License
