@@ -6,7 +6,7 @@ requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-  {name = "Idea Crafters LLC", email = "lab@ideacrafters.com"},
+  {name = "Idea Crafters LLC", email = "open@ideacrafters.com"},
   {name = "Jad Bitar"},
   {name = "Monaam Benhouria"}
 ]
